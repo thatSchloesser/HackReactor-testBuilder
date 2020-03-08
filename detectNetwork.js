@@ -4,30 +4,58 @@
 
 // How can you tell one card network from another? Easy! 
 // There are two indicators:
-//   1. The first few numbers (called the prefix)
+//   1. The first few numbers (called the duoPrefix)
 //   2. The number of digits in the number (called the length)
 
 var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
-    var prefix = cardNumber[0] + cardNumber[1]
+ 
+    var duoPrefix = cardNumber[0] + cardNumber[1]
+    var triPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2]
+    var quadPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2] + cardNumber[3]
 
+    var length = cardNumber.length
 
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
- 	if((prefix === "38" || prefix === "39" )&& cardNumber.length === 14){
+ 	if((duoPrefix === "38" || duoPrefix === "39" ) && length === 14){
  		return "Diner's Club"
  	}
   // The American Express network always starts with a 34 or 37 and is 15 digits long
-  else if((prefix === "34" || prefix === "37" )&& cardNumber.length === 15){
+  else if((duoPrefix === "34" || duoPrefix === "37" ) && length === 15){
 	return "American Express"
   }
 
-  else if((prefix === "51" || prefix === "52" || prefix === "53" 
-  	|| prefix === "54" || prefix ==="55" ) && cardNumber.length === 16){
+  else if((duoPrefix === "51" 
+  	|| duoPrefix === "52" 
+  	|| duoPrefix === "53" 
+  	|| duoPrefix === "54" 
+  	|| duoPrefix === "55" 
+  	) && length === 16){
   	return "MasterCard"
   }
-  else if (cardNumber[0] === "4" && (cardNumber.length === 13 || cardNumber.length === 16 || cardNumber.length === 19)){
-  	return "Visa"
+
+  //Visa
+  else if (cardNumber[0] === "4" 
+  	&& (length === 13 
+	  	|| length === 16 
+	  	|| length === 19)){
+	  return "Visa"
   }
+
+  else if((quadPrefix === "6011" 
+  	|| triPrefix === "644"
+  	|| triPrefix === "645"
+  	|| triPrefix === "646"
+  	|| triPrefix === "647"
+  	|| triPrefix === "648"
+  	|| triPrefix === "649"
+  	|| duoPrefix === "65"
+  	) && (
+  	length === 16 || length === 19){
+  		return "Discover"
+  	}
+  	
+
   else return ""
 
 };
