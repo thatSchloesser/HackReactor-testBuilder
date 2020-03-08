@@ -13,11 +13,30 @@ var detectNetwork = function(cardNumber) {
     var duoPrefix = cardNumber[0] + cardNumber[1]
     var triPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2]
     var quadPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2] + cardNumber[3]
+    var hexPrefi = cardNumber[0] + cardNumber[1] + cardNumber[2] + cardNumber[3] 
+    	+ cardNumber[4] + cardNumber[5]
 
     var length = cardNumber.length
 
+ 	// Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759
+ 	// and a length of 16, 18, or 19.
+  	if((hexPrefix === "4903" 
+  		|| hexPrefix === "4905"
+  		|| hexPrefix === "4911"
+  		|| hexPrefix === "4926"
+  		|| hexPrefix === "564182"
+  		|| hexPrefix === "633110"
+  		|| hexPrefix === "6333"
+  		|| hexPrefix === "6759"
+  		) && (
+  		length === 16 || length === 18 || length === 19 )){
+  	  return "Switch"
+  	}
+
+
+
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
- 	if((duoPrefix === "38" || duoPrefix === "39" ) && length === 14){
+ 	else if((duoPrefix === "38" || duoPrefix === "39" ) && length === 14){
  		return "Diner's Club"
  	}
   // The American Express network always starts with a 34 or 37 and is 15 digits long
@@ -69,6 +88,25 @@ var detectNetwork = function(cardNumber) {
   	|| length === 18 || length === 19)){
   		return "Maestro"
   	}
+
+// China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288
+// and a length of 16-19.
+  else if((hexPrefix === "5018" 
+  	|| hexPrefix === "5020"
+  	|| hexPrefix === "5038"
+  	|| hexPrefix === "6304"
+  	) && (
+  	length === 12 || length === 13 || length === 14 
+  	|| length === 15 || length === 16 || length === 17
+  	|| length === 18 || length === 19)){
+  		return "Maestro"
+  	}
+	
+
+
+
+
+
 
 
   else return ""

@@ -207,8 +207,6 @@ describe('Maestro', function() {
 
   var should = chai.should(); //why does this call the function instead of reference it? => read docs
 
-  // var postfix = "1234567"  //starts at 12
-
   for (var length = 12; length <=19 ; length++) {
     (function(length){
 
@@ -217,8 +215,6 @@ describe('Maestro', function() {
       for(var i=0; i< postfixLength;i++){
         postfix += "1"
       }
-      console.log(length)
-      console.log(postfix)
 
       it('has a prefix of 5018 and a length of ' + length,function(){
         detectNetwork("5018" + postfix).should.equal("Maestro");
@@ -233,9 +229,73 @@ describe('Maestro', function() {
         detectNetwork("6304" + postfix).should.equal("Maestro");
       });
     })(length)     
-    //WHY AM I CALLING tHE IIFE on length?  
+    //WHY am i calling the IIFE on length?  
   }
 });
+
+
+
+// Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 
+// and a length of 16, 18, or 19.
+
+//Is there a better way than just writing 24 tests? Tedious as hell.
+describe('Switch', function() {
+  var should = chai.should(); //why does this call the function instead of reference it? => read docs
+
+  // var postfix = "1234567"  //starts at 12
+
+  for (var length = 16; length <=19 ; length+=2) {
+    (function(length){
+
+      var longPostfix = ""
+      var shortPostfix = ""
+      var longLength = length -4
+      var shortLength = length -6
+      for(var i=0; i< longLength;i++){
+        longPostfix += "1"
+
+        if(i < shortLength){
+          shortPostfix += "1"
+        }
+      }
+
+      console.log(length)
+
+
+      it('has a prefix of 4903 and a length of ' + length,function(){
+        detectNetwork("4903" + longPostfix).should.equal("Switch");
+      });
+      it('has a prefix of 4905 and a length of ' + length,function(){
+        detectNetwork("4905" + longPostfix).should.equal("Switch");
+      });
+      it('has a prefix of 4911 and a length of ' + length,function(){
+        detectNetwork("4911" + longPostfix).should.equal("Switch");
+      });
+      it('has a prefix of 4936 and a length of ' + length,function(){
+        detectNetwork("4936" + longPostfix).should.equal("Switch");
+      });
+
+
+      it('has a prefix of 6333 and a length of ' + length,function(){
+        detectNetwork("6333" + longPostfix).should.equal("Switch");
+      });
+      it('has a prefix of 6759 and a length of ' + length,function(){
+        detectNetwork("6759" + longPostfix).should.equal("Switch");
+      });
+      it('has a prefix of 564182 and a length of ' + length,function(){
+        detectNetwork("564182" + shortPostfix).should.equal("Switch");
+      });
+      it('has a prefix of 4936 and a length of ' + length,function(){
+        detectNetwork("633110" + shortPostfix).should.equal("Switch");
+      });
+
+      if(length ===18){
+        length = 19
+      }
+    })(length)     
+  }
+});
+
 
 // for (var prefix = 644; prefix <= 649; prefix++) {
 //     (function(prefix) {
