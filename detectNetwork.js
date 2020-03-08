@@ -20,14 +20,14 @@ var detectNetwork = function(cardNumber) {
 
  	// Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759
  	// and a length of 16, 18, or 19.
-  	if((hexPrefix === "4903" 
-  		|| hexPrefix === "4905"
-  		|| hexPrefix === "4911"
-  		|| hexPrefix === "4926"
+  	if((quadPrefix === "4903" 
+  		|| quadPrefix === "4905"
+  		|| quadPrefix === "4911"
+  		|| quadPrefix === "4936"
+  		|| quadPrefix === "6333"
+  		|| quadPrefix === "6759"
   		|| hexPrefix === "564182"
   		|| hexPrefix === "633110"
-  		|| hexPrefix === "6333"
-  		|| hexPrefix === "6759"
   		) && (
   		length === 16 || length === 18 || length === 19 )){
   	  return "Switch"
@@ -91,23 +91,17 @@ var detectNetwork = function(cardNumber) {
 
 // China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288
 // and a length of 16-19.
-  else if((hexPrefix === "5018" 
-  	|| hexPrefix === "5020"
-  	|| hexPrefix === "5038"
-  	|| hexPrefix === "6304"
+
+  else if(( 
+  	(hexPrefix >= 622126 && hexPrefix <= 622925)
+  	|| (hexPrefix >= 624 && hexPrefix <= 626)
+  	|| (hexPrefix >= 6282 && hexPrefix <= 6288)
   	) && (
-  	length === 12 || length === 13 || length === 14 
-  	|| length === 15 || length === 16 || length === 17
-  	|| length === 18 || length === 19)){
-  		return "Maestro"
+  	(length >= 16 && length <= 19)
+  	)){
+  		return "China UnionPay"
   	}
 	
-
-
-
-
-
-
 
   else return ""
 
