@@ -104,6 +104,8 @@ detectNetwork("6011123456789123")
 detectNetwork("6011123456789123123")
 
 
+
+
 detectNetwork('')
 detectNetwork('')
 detectNetwork('')

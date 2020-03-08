@@ -100,27 +100,48 @@ describe('Visa', function() {
   });
 });
 
+// describe('MasterCard', function() {
+//   // Chai lets you write more human-readable tests that throw helpful errors.
+//   // Expect syntax is one way to do this, but there are others. 
+//   // If you want to know more, check out the documentation. 
+//   //   http://chaijs.com/api/bdd/
+//   var expect = chai.expect;
+ 
+
+//   //filled in message
+//   it("has prefix of 51 and lenght of 16", function() {
+//     expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
+//   });
+ 
+//   it("...prefix of 52 and lenght of 16", function() {
+//     expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
+//   });
+ 
+//   it("...prefix of 53 and lenght of 16", function() {
+//     expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
+//   });
+ 
+
 describe('MasterCard', function() {
   // Chai lets you write more human-readable tests that throw helpful errors.
   // Expect syntax is one way to do this, but there are others. 
   // If you want to know more, check out the documentation. 
   //   http://chaijs.com/api/bdd/
-  var expect = chai.expect;
+  var should = chai.should();
  
 
   //filled in message
   it("has prefix of 51 and lenght of 16", function() {
-    expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
+    detectNetwork('5112345678901234').should.equal('MasterCard');
   });
  
   it("...prefix of 52 and lenght of 16", function() {
-    expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
+    detectNetwork('5212345678901234').should.equal('MasterCard');
   });
  
   it("...prefix of 53 and lenght of 16", function() {
-    expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
+    detectNetwork('5312345678901234').should.equal('MasterCard');
   });
- 
 
   // You can also use should instead of expect, which changes the style
   // slightly. It really doesn't matter which one you use - check out 
@@ -143,22 +164,22 @@ describe('MasterCard', function() {
 
 describe('Discover', function() {
 
-  var expect = chai.expect;
+  var should = chai.should();
 
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
   it('has a prefix of 6011 and a length of 16',function(){
-    expect(detectNetwork("6011123456789123")).to.equal("Discover");
+    detectNetwork("6011123456789123").should.equal("Discover");
   });
   it('has a prefix of 6011 and a length of 19',function(){
-    expect(detectNetwork("6011123456789123123")).to.equal("Discover");
+    detectNetwork("6011123456789123123").should.equal("Discover");
   });
 
   it('has a prefix of 65 and a length of 16',function(){
-    expect(detectNetwork("6512123456789123")).to.equal("Discover");
+    detectNetwork("6512123456789123").should.equal("Discover");
   });
   it('has a prefix of 65 and a length of 19',function(){
-    expect(detectNetwork("6512123456789123123")).to.equal("Discover");
+    detectNetwork("6512123456789123123").should.equal("Discover");
   });
 
 
@@ -169,10 +190,10 @@ describe('Discover', function() {
   for (var prefix = 644; prefix <= 649; prefix++) {
      (function(prefix){
       it('has a prefix of ' + prefix + ' and a length of 16',function(){
-        expect(detectNetwork("" + prefix + "1234567891234")).to.equal("Discover");
+        detectNetwork("" + prefix + "1234567891234").should.equal("Discover");
       });
       it('has a prefix of ' + prefix + ' and a length of 19',function(){
-        expect(detectNetwork("" + prefix + "1234567891234123")).to.equal("Discover");
+        detectNetwork("" + prefix + "1234567891234123").should.equal("Discover");
       });
     })(prefix)
   }
@@ -186,23 +207,33 @@ describe('Maestro', function() {
 
   var should = chai.should(); //why does this call the function instead of reference it? => read docs
 
-  var postfix = "1234567"  //starts at 12
+  // var postfix = "1234567"  //starts at 12
 
   for (var length = 12; length <=19 ; length++) {
-    postfix += "1"
+    (function(length){
 
-    it('has a prefix of 5018 and a length of ' + length,function(){
-      detectNetwork("5018" + postfix).should.equal("Maestro");
-    });
-    it('has a prefix of 5020 and a length of ' + length,function(){
-      detectNetwork("5020" + postfix).should.equal("Maestro");
-    });
-    it('has a prefix of 5038 and a length of ' + length,function(){
-      detectNetwork("5038" + postfix).should.equal("Maestro");
-    });
-    it('has a prefix of 6304 and a length of ' + length,function(){
-      detectNetwork("6304" + postfix).should.equal("Maestro");
-    });         
+      var postfix = ""
+      var postfixLength = length -4
+      for(var i=0; i< postfixLength;i++){
+        postfix += "1"
+      }
+      console.log(length)
+      console.log(postfix)
+
+      it('has a prefix of 5018 and a length of ' + length,function(){
+        detectNetwork("5018" + postfix).should.equal("Maestro");
+      });
+      it('has a prefix of 5020 and a length of ' + length,function(){
+        detectNetwork("5020" + postfix).should.equal("Maestro");
+      });
+      it('has a prefix of 5038 and a length of ' + length,function(){
+        detectNetwork("5038" + postfix).should.equal("Maestro");
+      });
+      it('has a prefix of 6304 and a length of ' + length,function(){
+        detectNetwork("6304" + postfix).should.equal("Maestro");
+      });
+    })(length)     
+    //WHY AM I CALLING tHE IIFE on length?  
   }
 });
 
