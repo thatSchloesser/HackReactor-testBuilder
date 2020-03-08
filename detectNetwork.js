@@ -58,7 +58,18 @@ var detectNetwork = function(cardNumber) {
   	}
   	
   	//Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
-  	//it's also busywork at this point so I'm skipping
+  	//feels like busywork at this point...
+  else if((quadPrefix === "5018" 
+  	|| quadPrefix === "5020"
+  	|| quadPrefix === "5038"
+  	|| quadPrefix === "6304"
+  	) && (
+  	length === 12 || length === 13 || length === 14 
+  	|| length === 15 || length === 16 || length === 17
+  	|| length === 18 || length === 19)){
+  		return "Maestro"
+  	}
+
 
   else return ""
 

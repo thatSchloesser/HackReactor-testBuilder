@@ -155,15 +155,19 @@ describe('Discover', function() {
   });
 
 
+  //loop was provided helper code
+
+  //not sure why we need an IIFE (immediately invoked function expression)
+    //-> I literally removed the IIFE and it works fine, so perhaps they used the conde differently
   for (var prefix = 644; prefix <= 649; prefix++) {
-      (function(prefix) {
-          it('has a prefix of ' + prefix + ' and a length of 16',function(){
-            expect(detectNetwork("" + prefix + "1234567891234")).to.equal("Discover");
-          });
-          it('has a prefix of ' + prefix + ' and a length of 19',function(){
-            expect(detectNetwork("" + prefix + "1234567891234123")).to.equal("Discover");
-          });
-      })(prefix)
+     
+      it('has a prefix of ' + prefix + ' and a length of 16',function(){
+        expect(detectNetwork("" + prefix + "1234567891234")).to.equal("Discover");
+      });
+      it('has a prefix of ' + prefix + ' and a length of 19',function(){
+        expect(detectNetwork("" + prefix + "1234567891234123")).to.equal("Discover");
+      });
+      
   }
 
 
@@ -172,13 +176,28 @@ describe('Discover', function() {
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
+
+  var should = chai.should(); //why does this call the function instead of reference it? => read docs
+
+  var postfix = "1234567"  //starts at 12
+
+  for (var length = 12; length <=19 ; length++) {
+    postfix += "1"
+
+    it('has a prefix of 5018 and a length of ' + length,function(){
+      detectNetwork("5018" + postfix).should.equal("Maestro");
+    });
+    it('has a prefix of 5018 and a length of ' + length,function(){
+      detectNetwork("5020" + postfix).should.equal("Maestro");
+    });
+    it('has a prefix of 5018 and a length of ' + length,function(){
+      detectNetwork("5038" + postfix).should.equal("Maestro");
+    });
+    it('has a prefix of 5018 and a length of ' + length,function(){
+      detectNetwork("6304" + postfix).should.equal("Maestro");
+    });         
+  }
 });
 
 
-// for (var prefix = 644; prefix <= 649; prefix++) {
-//     (function(prefix) {
-//         it('has a prefix of ' + prefix + ' and a length of 16');
-//         it('has a prefix of ' + prefix + ' and a length of 19');
-//     })(prefix)
-// }
 
