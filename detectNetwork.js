@@ -25,6 +25,7 @@ var detectNetwork = function(cardNumber) {
 	return "American Express"
   }
 
+  //Mastercard
   else if((duoPrefix === "51" 
   	|| duoPrefix === "52" 
   	|| duoPrefix === "53" 
@@ -42,6 +43,7 @@ var detectNetwork = function(cardNumber) {
 	  return "Visa"
   }
 
+  //Discover
   else if((quadPrefix === "6011" 
   	|| triPrefix === "644"
   	|| triPrefix === "645"
@@ -51,10 +53,12 @@ var detectNetwork = function(cardNumber) {
   	|| triPrefix === "649"
   	|| duoPrefix === "65"
   	) && (
-  	length === 16 || length === 19){
+  	length === 16 || length === 19)){
   		return "Discover"
   	}
   	
+  	//Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
+  	//it's also busywork at this point so I'm skipping
 
   else return ""
 
@@ -82,6 +86,11 @@ detectNetwork('5212345678901234'),
 detectNetwork('5312345678901234'),
 detectNetwork('5412345678901234'),
 detectNetwork('5512345678901234'))
+
+
+//-----
+detectNetwork("6011123456789123")
+detectNetwork("6011123456789123123")
 
 
 detectNetwork('')
