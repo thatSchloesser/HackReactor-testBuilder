@@ -13,7 +13,7 @@ var detectNetwork = function(cardNumber) {
     var duoPrefix = cardNumber[0] + cardNumber[1]
     var triPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2]
     var quadPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2] + cardNumber[3]
-    var hexPrefi = cardNumber[0] + cardNumber[1] + cardNumber[2] + cardNumber[3] 
+    var hexPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2] + cardNumber[3] 
     	+ cardNumber[4] + cardNumber[5]
 
     var length = cardNumber.length
