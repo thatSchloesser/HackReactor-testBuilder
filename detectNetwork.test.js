@@ -359,44 +359,58 @@ describe('Switch', function() {
   for (var length = 16; length <=19 ; length++) {
     (function(length){
 
-      
-        var longPostfix = ""
-        var shortPostfix = ""
-        var longLength = length -4
-        var shortLength = length -6
-        for(var i=0; i< longLength;i++){
-          longPostfix += "1"
+        var prefixCase1Length = 3
+        var prefixCase2Length = 4
+        var prefixCase3Length = 6
 
-          if(i < shortLength){
-            shortPostfix += "1"
+        var postfix1 = ""
+        var postfix2 = ""
+        var postfix3 = ""
+
+        var length1 = length - prefixCase1Length
+        var length2 = length - prefixCase2Length
+        var length3 = length - prefixCase3Length
+
+        for(var i=0; i< length1;i++){
+          postfix1 += "1"
+
+          if(i < length2){
+            postfix2 += "1"
+          }
+          if(i < length3){
+            postfix3+= "1"
           }
         }
 
-        it('has a prefix of 4903 and a length of ' + length,function(){
-          detectNetwork("4903" + longPostfix).should.equal("Switch");
+      //prefix case 1
+      for (var prefix = 624; prefix <=626 ; prefix++) {
+        (function(length){
+          it('has a prefix of ' + prefix.toString() + ' and a length of ' + length,function(){
+          detectNetwork(prefix.toString() + postfix1).should.equal("Switch");
         });
-        it('has a prefix of 4905 and a length of ' + length,function(){
-          detectNetwork("4905" + longPostfix).should.equal("Switch");
-        });
-        it('has a prefix of 4911 and a length of ' + length,function(){
-          detectNetwork("4911" + longPostfix).should.equal("Switch");
-        });
-        it('has a prefix of 4936 and a length of ' + length,function(){
-          detectNetwork("4936" + longPostfix).should.equal("Switch");
-        });
-        it('has a prefix of 6333 and a length of ' + length,function(){
-          detectNetwork("6333" + longPostfix).should.equal("Switch");
-        });
-        it('has a prefix of 6759 and a length of ' + length,function(){
-          detectNetwork("6759" + longPostfix).should.equal("Switch");
-        });
-        it('has a prefix of 564182 and a length of ' + length,function(){
-          detectNetwork("564182" + shortPostfix).should.equal("Switch");
-        });
-        it('has a prefix of 4936 and a length of ' + length,function(){
-          detectNetwork("633110" + shortPostfix).should.equal("Switch");
-        });s
+        })(length)
       }
+      
+      //prefix case 2
+      for (var prefix = 6282; prefix <=6288 ; prefix++) {
+        (function(length){
+          it('has a prefix of ' + prefix.toString() + ' and a length of ' + length,function(){
+          detectNetwork(prefix.toString() + postfix2).should.equal("Switch");
+        });
+        })(length)
+      }
+      
+      //prefix case 3
+      for (var prefix = 622126; prefix <=622925; prefix++) {
+        (function(length){
+          it('has a prefix of ' + prefix.toString() + ' and a length of ' + length,function(){
+          detectNetwork(prefix.toString() + postfix3).should.equal("Switch");
+        });
+        })(length)
+      }
+      
+
+
     })(length)
 });
 
