@@ -9,6 +9,8 @@
 
 var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
+
+  console.log(cardNumber)
  
     var duoPrefix = cardNumber[0] + cardNumber[1]
     var triPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2]
@@ -94,8 +96,8 @@ var detectNetwork = function(cardNumber) {
 
   else if(( 
   	(hexPrefix >= 622126 && hexPrefix <= 622925)
-  	|| (hexPrefix >= 624 && hexPrefix <= 626)
-  	|| (hexPrefix >= 6282 && hexPrefix <= 6288)
+  	|| (triPrefix >= 624 && triPrefix <= 626)
+  	|| (quadPrefix >= 6282 && quadPrefix <= 6288)
   	) && (
   	(length >= 16 && length <= 19)
   	)){
