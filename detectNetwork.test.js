@@ -323,43 +323,46 @@ describe('China UnionPay', function() {
         var length3 = length - prefixCase3Length
 
         for(var i=0; i< length1;i++){
-          postfix1 += "1"
+          postfix1 += "_"
 
           if(i < length2){
-            postfix2 += (i%2).to
+            postfix2 += "_"
           }
           if(i < length3){
-            postfix3+= "1"
+            postfix3+= "_"
           }
         }
 
     
       //prefix case 1
       for (var prefix = 624; prefix <=626 ; prefix++) {
-        (function(length){
+        (function(prefix){
           console.log(prefix+postfix1)
           it('has a prefix of ' + prefix + ' and a length of ' + length,function(){
           detectNetwork(prefix + postfix1).should.equal("China UnionPay");
         });
-        })(length)
+        })(prefix)
       }
       
       //prefix case 2
       for (var prefix = 6282; prefix <=6288 ; prefix++) {
-        (function(length){
-          it('has a prefix of ' + prefix.toString() + ' and a length of ' + length,function(){
+        (function(prefix){
+
+          console.log(prefix + postfix2)
+
+          it('has a prefix of ' + prefix + ' and a length of ' + length,function(){
           detectNetwork(prefix + postfix2).should.equal("China UnionPay");
         });
-        })(length)
+        })(prefix)
       }
       
       //prefix case 3
       for (var prefix = 622126; prefix <=622925; prefix++) {
-        (function(length){
+        (function(prefix){
           it('has a prefix of ' + prefix + ' and a length of ' + length,function(){
           detectNetwork(prefix + postfix3).should.equal("China UnionPay");
         });
-        })(length)
+        })(prefix)
       }
 
     })(length)

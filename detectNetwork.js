@@ -10,8 +10,6 @@
 var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
 
-  console.log(cardNumber)
- 
     var duoPrefix = cardNumber[0] + cardNumber[1]
     var triPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2]
     var quadPrefix = cardNumber[0] + cardNumber[1] + cardNumber[2] + cardNumber[3]
