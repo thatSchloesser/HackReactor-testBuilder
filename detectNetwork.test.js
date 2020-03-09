@@ -351,7 +351,7 @@ describe('Switch', function() {
 
 // China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 
 // and a length of 16-19.
-describe('Switch', function() {
+describe('China UnionPay', function() {
   var should = chai.should(); 
 
   // var postfix = "1234567"  //starts at 12
@@ -412,6 +412,7 @@ describe('Switch', function() {
 
 
     })(length)
+  }
 });
 
 // for (var prefix = 644; prefix <= 649; prefix++) {
